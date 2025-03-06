@@ -35,8 +35,8 @@ int main() {
 
     printf("\nSorting...\n");
     startTime = currentTimeMillis();
-    // insertionSort(records, n); 
-    // selectionSort(records, n); 
+    //insertionSort(records, n); 
+    selectionSort(records, n); 
     // mergeSort(records, p, r);  
     // customSort
     endTime = currentTimeMillis();
@@ -45,8 +45,8 @@ int main() {
 
 
     // to print records
-    printf("Printing records:\n");
-    printRecord(records, n); 
+    // printf("Printing records:\n");
+    // printRecord(records, n); 
 
 
     free(records);  // Free allocated memory
