@@ -35,9 +35,9 @@ int main() {
 
     printf("\nSorting...\n");
     startTime = currentTimeMillis();
-    // insertionSort(records, n);  // Implement in sortingalgorithms.c
-    // selectionSort(records, n);  // Implement in sortingalgorithms.c
-    // mergeSort(records, n);  // Implement in sortingalgorithms.c
+    // insertionSort(records, n); 
+    // selectionSort(records, n); 
+    // mergeSort(records, p, r);  
     // customSort
     endTime = currentTimeMillis();
     executionTime = endTime - startTime;
