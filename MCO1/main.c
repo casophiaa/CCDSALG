@@ -11,7 +11,7 @@
 int main() {
     int n;
     long startTime, endTime, executionTime;
-    char filepath[] = "/Users/sophiaorencia/Desktop/MCO1/data/random25000.txt"; //change file location
+    char filepath[] = "/Users/dennissesalgado/Documents/GitHub/CCDSALG/MCO1/data/random100.txt"; //change file location
 
     FILE *fp = fopen(filepath, "r");
     if (fp == NULL) {
@@ -50,7 +50,17 @@ printf("\nSorting...\n");
 
 
     // Insertion Sort
-
+    totalTime = 0;
+    printf("\nSorting with Insertion Sort...\n");
+    for (int i = 0; i < ITERATIONS; i++) {
+        readFile(records, filepath); // Reload original data
+        startTime = currentTimeMillis();
+        insertionSort(records, n);
+        endTime = currentTimeMillis();
+        totalTime += (endTime - startTime);
+    }
+    printf("Insertion Sort Average Execution Time: %ld ms\n", totalTime / ITERATIONS);
+   
     // Selection Sort
     totalTime = 0;
     printf("\nSorting with Selection Sort...\n");
@@ -88,6 +98,8 @@ printf("\nSorting...\n");
         totalTime += (endTime - startTime);
     }
     printf("Bucket Sort Average Execution Time: %ld ms\n", totalTime / ITERATIONS);
+
+    printf("Frequency Count: %d", counter);
 
     free(records);  // Free allocated memory
 

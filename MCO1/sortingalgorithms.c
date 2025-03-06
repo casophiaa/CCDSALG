@@ -10,6 +10,7 @@
 * as needed by the sorting algorithms here.
 */
 
+int counter=0;
 
 void printRecord(Record *arr, int n) {
     for (int i = 0; i < n; i++) {
@@ -25,17 +26,24 @@ void swap (Record *arr, int i, int j){
 }
 
 
+void insertionSort(Record *arr, int n){
+    // TODO: Implement this sorting algorithm here.
+    int i,j;
+    Record key;
+    counter = 0;                                            counter++;
 
-// void insertionSort(Record *arr, int n)
-// {
-//     // TODO: Implement this sorting algorithm here.
+    for (i=1; i<n; i++){                                        counter++;
+        key = arr[i];                                           counter++;
+        j= i-1;                                                 counter++;
+       while (j >= 0 && arr[j].idNumber > key.idNumber) {       counter++;
+            arr[j + 1] = arr[j];                                counter++;
+            j--;                                                counter++;
+        }                                                       counter++;
+        arr[j + 1] = key;                                       counter++;
+    }                                                           counter++;
 
-
-
-
-
-
-// }
+    printRecord(arr, n);
+}
 
 //first index is set as min then compared to other indices; if min is bigger than curr i then swap
 void selectionSort(Record *arr, int n) {
@@ -49,7 +57,7 @@ void selectionSort(Record *arr, int n) {
         }
     }
 
-    printRecord(arr, n);
+    //printRecord(arr, n);
 }
 
 
