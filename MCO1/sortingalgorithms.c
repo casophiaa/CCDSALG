@@ -41,8 +41,7 @@ void insertionSort(Record *arr, int n){
         }                                                       counter++;
         arr[j + 1] = key;                                       counter++;
     }                                                           counter++;
-
-    printRecord(arr, n);
+    //printRecord(arr, n);                                      counter++;
 }
 
 //first index is set as min then compared to other indices; if min is bigger than curr i then swap
