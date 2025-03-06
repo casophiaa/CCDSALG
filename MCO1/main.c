@@ -6,10 +6,12 @@
 #include <string.h>
 #include <stdlib.h>  // For dynamic memory allocation
 
+#define ITERATIONS 5  // Number of times each sorting algorithm will run
+
 int main() {
     int n;
     long startTime, endTime, executionTime;
-    char filepath[] = "/Users/dennissesalgado/Documents/GitHub/CCDSALG/MCO1/data/random100.txt";
+    char filepath[] = "/Users/sophiaorencia/Desktop/MCO1/data/random25000.txt"; //change file location
 
     FILE *fp = fopen(filepath, "r");
     if (fp == NULL) {
@@ -31,9 +33,9 @@ int main() {
         return 1;
     }
 
-    readFile(records, filepath);
-
-    printf("\nSorting...\n");
+/*
+OG SELECTION SORT CODE
+printf("\nSorting...\n");
     startTime = currentTimeMillis();
     //insertionSort(records, n); 
     selectionSort(records, n); 
@@ -42,16 +44,52 @@ int main() {
     endTime = currentTimeMillis();
     executionTime = endTime - startTime;
     printf("Execution Time: %ld ms\n", executionTime);
+*/
+
+    long totalTime = 0;
 
 
-    // to print records
-    // printf("Printing records:\n");
-    // printRecord(records, n); 
+    // Insertion Sort
 
+    // Selection Sort
+    totalTime = 0;
+    printf("\nSorting with Selection Sort...\n");
+    for (int i = 0; i < ITERATIONS; i++) {
+        readFile(records, filepath); // Reload original data
+        startTime = currentTimeMillis();
+        selectionSort(records, n);
+        endTime = currentTimeMillis();
+        totalTime += (endTime - startTime);
+    }
+    printf("Selection Sort Average Execution Time: %ld ms\n", totalTime / ITERATIONS);
+
+    
+    // Merge Sort
+    totalTime = 0;
+    printf("\nSorting with Merge Sort...\n");
+    for (int i = 0; i < ITERATIONS; i++) {
+        readFile(records, filepath); // Reload original data
+        startTime = currentTimeMillis();
+        mergeSort(records, 0, n - 1);
+        endTime = currentTimeMillis();
+        totalTime += (endTime - startTime);
+    }
+    printf("Merge Sort Average Execution Time: %ld ms\n", totalTime / ITERATIONS);
+
+    
+    // Bucket Sort
+    totalTime = 0;
+    printf("\nSorting with Bucket Sort...\n");
+    for (int i = 0; i < ITERATIONS; i++) {
+        readFile(records, filepath); // Reload original data
+        startTime = currentTimeMillis();
+        bucketSort(records, n);
+        endTime = currentTimeMillis();
+        totalTime += (endTime - startTime);
+    }
+    printf("Bucket Sort Average Execution Time: %ld ms\n", totalTime / ITERATIONS);
 
     free(records);  // Free allocated memory
 
     return 0;
 }
-
-
