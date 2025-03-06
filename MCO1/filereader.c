@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #include <string.h>
-#include "Record.c"
+#include "record.c"
 
 /*
 * This function reads a file from the given path, and
