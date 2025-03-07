@@ -10,7 +10,7 @@
 * as needed by the sorting algorithms here.
 */
 
-int counter=0;
+long counter = 0;
 
 void printRecord(Record *arr, int n) {
     for (int i = 0; i < n; i++) {
@@ -30,7 +30,7 @@ void insertionSort(Record *arr, int n){
     // TODO: Implement this sorting algorithm here.
     int i,j;
     Record key;
-    counter = 0;                                            counter++;
+    counter = 0;                                                counter++;
 
     for (i=1; i<n; i++){                                        counter++;
         key = arr[i];                                           counter++;
@@ -63,79 +63,93 @@ void selectionSort(Record *arr, int n) {
 
 void merge(Record *arr, int left, int mid, int right) {
     int i, j, k;
-    int n1 = mid - left + 1;
-    int n2 = right - mid;
+    int n1 = mid - left + 1;                                            counter++;
+    int n2 = right - mid;                                               counter++;
 
-    Record *L = (Record *)malloc(n1 * sizeof(Record));
-    Record *R = (Record *)malloc(n2 * sizeof(Record));
+    Record *L = (Record *)malloc(n1 * sizeof(Record));                  counter++;
+    Record *R = (Record *)malloc(n2 * sizeof(Record));                  counter++;
 
-    for (i = 0; i < n1; i++)
-        L[i] = arr[left + i];
-    for (j = 0; j < n2; j++)
-        R[j] = arr[mid + 1 + j];
-
-    i = 0;
-    j = 0;
-    k = left;
-    
-    while (i < n1 && j < n2) {
-        if (L[i].idNumber <= R[j].idNumber)
-            arr[k++] = L[i++];
-        else
-            arr[k++] = R[j++];
+    for (i = 0; i < n1; i++) {                                          counter++; 
+        L[i] = arr[left + i];                                           counter++; 
+    }
+    for (j = 0; j < n2; j++) {                                          counter++; 
+        R[j] = arr[mid + 1 + j];                                        counter++; 
     }
 
-    while (i < n1)
-        arr[k++] = L[i++];
-    
-    while (j < n2)
-        arr[k++] = R[j++];
+    i = 0;                                                              counter++; 
+    j = 0;                                                              counter++; 
+    k = left;                                                           counter++;
 
-    free(L);
-    free(R);
+    while (i < n1 && j < n2) {                                          counter++;
+        if (L[i].idNumber <= R[j].idNumber) {                           counter++;
+            arr[k++] = L[i++];                                          counter++;
+        } else {
+            arr[k++] = R[j++];                                          counter++;
+        }
+    }
+
+    while (i < n1) {                                                    counter++;
+        arr[k++] = L[i++];                                              counter++;
+    }
+
+    while (j < n2) {                                                    counter++;
+        arr[k++] = R[j++];                                              counter++;
+    }
+
+    free(L);                                                            counter++; 
+    free(R);                                                            counter++;
 }
 
 void mergeSort(Record *arr, int left, int right) {
-    if (left < right) {
-        int mid = left + (right - left) / 2;
-        mergeSort(arr, left, mid);
-        mergeSort(arr, mid + 1, right);
-        merge(arr, left, mid, right);
+    if (left < right) {                                                 counter++;
+        int mid = left + (right - left) / 2;                            counter++;
+
+        mergeSort(arr, left, mid);                                      counter++;
+        mergeSort(arr, mid + 1, right);                                 counter++;
+
+        merge(arr, left, mid, right);                                   counter++;
     }
 }
 
 #define BUCKET_SIZE 10  // Define the number of buckets
 
 void bucketSort(Record *arr, int n) {
-    int minID = arr[0].idNumber, maxID = arr[0].idNumber;
-    
-    for (int i = 1; i < n; i++) {
-        if (arr[i].idNumber < minID) minID = arr[i].idNumber;
-        if (arr[i].idNumber > maxID) maxID = arr[i].idNumber;
-    }
+    int minID = arr[0].idNumber;                                        counter++;
+    int maxID = arr[0].idNumber;                                        counter++;
 
-    int range = (maxID - minID) / BUCKET_SIZE + 1;
-    Record *buckets[BUCKET_SIZE];
-    int bucketCount[BUCKET_SIZE] = {0};
-
-    for (int i = 0; i < BUCKET_SIZE; i++)
-        buckets[i] = (Record *)malloc(n * sizeof(Record));
-
-    for (int i = 0; i < n; i++) {
-        int bucketIndex = (arr[i].idNumber - minID) / range;
-        buckets[bucketIndex][bucketCount[bucketIndex]++] = arr[i];
-    }
-
-    for (int i = 0, k = 0; i < BUCKET_SIZE; i++) {
-        if (bucketCount[i] > 0) {
-            mergeSort(buckets[i], 0, bucketCount[i] - 1);  // Use Merge Sort to sort each bucket
-            for (int j = 0; j < bucketCount[i]; j++)
-                arr[k++] = buckets[i][j];
+    for (int i = 1; i < n; i++) {                                       counter++;
+        if (arr[i].idNumber < minID) {                                  counter++;
+            minID = arr[i].idNumber;                                    counter++;
         }
-        free(buckets[i]);
+        if (arr[i].idNumber > maxID) {                                  counter++;
+            maxID = arr[i].idNumber;                                    counter++;
+        }
+    }
+
+    int range = (maxID - minID) / BUCKET_SIZE + 1;                      counter += 2;
+
+    Record *buckets[BUCKET_SIZE];                                       counter++;
+    int bucketCount[BUCKET_SIZE] = {0};                                 counter++;
+
+    for (int i = 0; i < BUCKET_SIZE; i++) {                             counter++;
+        buckets[i] = (Record *)malloc(n * sizeof(Record));              counter++;
+    }
+
+    for (int i = 0; i < n; i++) {                                       counter++;
+        int bucketIndex = (arr[i].idNumber - minID) / range;            counter++;
+        buckets[bucketIndex][bucketCount[bucketIndex]++] = arr[i];      counter++;
+    }
+
+    for (int i = 0, k = 0; i < BUCKET_SIZE; i++) {                      counter++;
+        if (bucketCount[i] > 0) {                                       counter++;
+            mergeSort(buckets[i], 0, bucketCount[i] - 1);               counter++;
+            for (int j = 0; j < bucketCount[i]; j++) {                  counter++;
+                arr[k++] = buckets[i][j];                               counter++;
+            }
+        }
+        free(buckets[i]);                                               counter++;
     }
 }
-
 
 
 
